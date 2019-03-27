@@ -1,0 +1,96 @@
+
+
+
+		--> WEB PROJECT:
+      ======================================
+
+ - API Y WEB SCRAPING: 
+ 	- Elegir una API de acceso publico: https://www.songkick.com/developer/
+ 	- Tipo de datos que aporta y como:
+		- Información de los eventos pasados, como conciertos etc.
+		- Se puede buscar los eventos pasados por artista
+	 - Web Scraping de wikipedia: best musical artist of the history by Rolling Stones (100 artistas/lugar procedencia)
+		*Puede enriquecerse despues con los años en activo del artista y con el género musical
+
+
+ - IDEA:
+
+	- Puedo buscar en wikipedia cuales son los artistas de la historia mas importantes: mayor volumen de venta
+ 	- Extraigo los datos de la api de estos artistas: todos sus conciertos y eventos
+
+ - Análisis de resultados:
+	- Que ciudad ha sido la sede de un mayor de eventos de los mejores artistas de la historia. GRÁFICO TOP 5
+	- Que pais ha sido la sede de un mayor numero de eventos de la historia. GRÁFICO
+	- Que artista dentro de los mejores (20 mejores? 10 mejores?) dio un mayor numero de eventos en su carrera musical. GRÁFICO
+
+ - PIPELINE:
+	-Opcion de consultar el numero de eventos por artista y ciudad. 
+
+
+EJEMPLO:
+
+import requests
+import json
+import pandas as pd
+
+# proporcionada por la documentación de la API: https://rickandmortyapi.com/documentation
+url = 'https://rickandmortyapi.com/api/episode/'
+
+# los 9 primeros episodios
+capitulos = []
+for i in range(1, 10): 
+    path = url + str(i)
+    r = requests.get(path)
+    capitulos.append(r.text)
+    
+# print(res)
+
+# por ejemplo el capítulo 1
+# capitulo1 = capitulos[0]
+# type(type(capitulo1))
+
+# jsn = json.loads(capitulo1)
+# print(jsn['name'])
+
+# almacenamos nombres de capítulos
+nombre_caps = []
+for c in capitulos: 
+    jsn = json.loads(c)
+    nombre_caps.append(jsn['name'])
+
+print(nombre_caps)
+
+df = pd.DataFrame()
+df['names'] = nombre_caps
+
+display(df)
+
+
+
+WEB PROJECT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
